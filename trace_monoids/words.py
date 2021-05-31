@@ -20,7 +20,10 @@ class Word:
         return list(self.word) == list(another_word.word)
 
     def __str__(self):
-        return self.word
+        return str(self.word)
+
+    def __repr__(self):
+        return str(self.word)
 
     def reversed(self) -> Word:
         """
@@ -70,14 +73,17 @@ class Word:
 
     def delete_lex_min_subsequence(self, v: Word) -> Word:
         """
-        Deletes lexicographically minimal subsequence that is equal to u from v
-        :return: v without first this subsequence
+        Deletes lexicographically minimal subsequence that contains the same letter as v from self
+        :return: self without this subsequence
         """
         result = []
-        i = 0
-        for j, letter in enumerate(self.word):
-            if i < len(v.word) and v.word[i] == letter:
-                i += 1
+        to_delete = defaultdict(int)
+        for letter in v:
+            to_delete[letter] += 1
+
+        for letter in self.word:
+            if to_delete[letter]:
+                to_delete[letter] -= 1
             else:
                 result.append(letter)
         return Word(result)

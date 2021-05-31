@@ -64,7 +64,7 @@ class TestEquations(unittest.TestCase):
                 u, v = random_word(alphabet, random.randint(0, 5)), random_word(alphabet, random.randint(0, 5))
                 solver, slow_solver = EquationSolver(monoid), SlowEquationSolver(monoid)
                 self.assertEqual(solver.solve(u, v), slow_solver.solve(u, v))
-                self.assertEqual(solver.right_hand_solve(u, v), solver.right_hand_solve(u, v))
+                self.assertEqual(solver.right_hand_solve(u, v), slow_solver.right_hand_solve(u, v))
 
 
 if __name__ == '__main__':
